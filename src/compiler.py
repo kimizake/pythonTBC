@@ -1,6 +1,5 @@
-class Compiler:
-    def __init__(self):
-        pass
+from .io import fileReader
 
-    def printHelloWorld(self):
-        print("hello world")
+class Compiler:
+    def __init__(self, filePath: str):
+        print(fileReader(filePath))
