@@ -25,11 +25,13 @@ class Tokens(enum.Enum):
     MINUS = 18
     MULTIPLY = 19
     DIVIDE = 20
-    LTHAN = 21
-    GTHAN = 22
-    EQ = 23
+    LT = 21
+    LEQ = 22
+    GT = 23
+    GEQ = 24
+    EQ = 25
     # IDENTIFIERS
-    IDENTIFIER = 24
+    IDENTIFIER = 26
 
 class TokenTypes(enum.Enum):
     KEYWORDS = 1
@@ -60,8 +62,10 @@ def getType(token: Tokens) -> TokenTypes:
         Tokens.MINUS: TokenTypes.OPERATORS,
         Tokens.MULTIPLY: TokenTypes.OPERATORS,
         Tokens.DIVIDE: TokenTypes.OPERATORS,
-        Tokens.LTHAN: TokenTypes.OPERATORS,
-        Tokens.GTHAN: TokenTypes.OPERATORS,
+        Tokens.LT: TokenTypes.OPERATORS,
+        Tokens.GEQ: TokenTypes.OPERATORS,
+        Tokens.GT: TokenTypes.OPERATORS,
+        Tokens.GEQ: TokenTypes.OPERATORS,
         Tokens.EQ: TokenTypes.OPERATORS,
         Tokens.IDENTIFIER: TokenTypes.IDENTIFIER
     }

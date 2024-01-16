@@ -54,9 +54,17 @@ class LexicalAnalyser:
             elif ch == "/":
                 ans.append((Tokens.DIVIDE, ch))
             elif ch == "<":
-                ans.append((Tokens.LTHAN, ch))
+                if ptr + 1 < len(code) and code[ptr + 1] == "=":
+                    ptr += 1
+                    ans.append((Tokens.LEQ, ch + code[ptr]))
+                else:
+                    ans.append((Tokens.LT, ch))
             elif ch == ">":
-                ans.append((Tokens.GTHAN, ch))
+                if ptr + 1 < len(code) and code[ptr + 1] == "=":
+                    ptr += 1
+                    ans.append((Tokens.GEQ, ch + code[ptr]))
+                else:
+                    ans.append((Tokens.GT, ch))
             elif ch == "=":
                 ans.append((Tokens.EQ, ch))
             # IDENTIFIER/KEYWORD
