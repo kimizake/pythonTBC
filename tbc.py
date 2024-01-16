@@ -6,3 +6,4 @@ from sys import argv
 
 if __name__ == "__main__":
     compiler = Compiler(os.path.abspath(argv[1]))
+    compiler.compile()
