@@ -19,16 +19,17 @@ BNF = {
         [Grammar.LINELIST]
     ],
     Grammar.LINELIST: [
-        [Grammar.LINE, Grammar.LINELIST],
+        [Grammar.LINE, Tokens.NL, Grammar.LINELIST],
+        [Grammar.LINE, Tokens.NL],
         [Grammar.LINE],
     ],
     Grammar.LINE: [
-        [Tokens.NUMBER, Grammar.STATEMENT, Tokens.NL],
-        [Grammar.STATEMENT, Tokens.NL]
+        [Tokens.NUMBER, Grammar.STATEMENT],
+        [Grammar.STATEMENT],
     ],
     Grammar.STATEMENT: [
-        [Tokens.PRINT, Grammar.EXPRLIST],
         [Tokens.IF, Grammar.EXPR, Grammar.RELOP, Grammar.EXPR, Tokens.THEN, Grammar.STATEMENT],
+        [Tokens.PRINT, Grammar.EXPRLIST],
         [Tokens.GOTO, Grammar.EXPR],
         [Tokens.INPUT, Grammar.VARLIST],
         [Tokens.LET, Tokens.IDENTIFIER, Tokens.EQ, Grammar.EXPR],
@@ -40,32 +41,32 @@ BNF = {
         [Tokens.END],
     ],
     Grammar.EXPRLIST: [
-        [Tokens.STRING],
-        [Grammar.EXPR],
         [Tokens.STRING, Tokens.COMMA, Grammar.EXPRLIST],
         [Grammar.EXPR, Tokens.COMMA, Grammar.EXPRLIST],
+        [Tokens.STRING],
+        [Grammar.EXPR],
     ],
     Grammar.VARLIST: [
+        [Tokens.IDENTIFIER, Tokens.COMMA, Grammar.VARLIST],
         [Tokens.IDENTIFIER],
-        [Tokens.IDENTIFIER, Tokens.COMMA, Grammar.VARLIST]
     ],
     Grammar.BASEXPR: [
-        [Grammar.TERM],
         [Grammar.TERM, Tokens.PLUS, Grammar.BASEXPR],
         [Grammar.TERM, Tokens.MINUS, Grammar.BASEXPR],
+        [Grammar.TERM],
     ],
     Grammar.EXPR: [
         [Tokens.STRING],
+        [Tokens.PLUS, Grammar.TERM, Grammar.BASEXPR],
+        [Tokens.MINUS, Grammar.TERM, Grammar.BASEXPR],
         [Grammar.BASEXPR],
         [Tokens.PLUS, Grammar.TERM],
         [Tokens.MINUS, Grammar.TERM],
-        [Tokens.PLUS, Grammar.TERM, Grammar.BASEXPR],
-        [Tokens.MINUS, Grammar.TERM, Grammar.BASEXPR],
     ],
     Grammar.TERM: [
-        [Grammar.FACTOR],
         [Grammar.FACTOR, Tokens.MULTIPLY, Grammar.TERM],
         [Grammar.FACTOR, Tokens.DIVIDE, Grammar.TERM],
+        [Grammar.FACTOR],
     ],
     Grammar.FACTOR: [
         [Tokens.IDENTIFIER],

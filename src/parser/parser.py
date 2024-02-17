@@ -37,7 +37,6 @@ class Parser:
                     else: break
                 elif part == token:
                     # Token matches this pattern
-                    # TODO build up syntax tree
                     root.addChild(
                         AST(token, lexeme)
                     )
@@ -48,5 +47,4 @@ class Parser:
                 # Full pattern was matched
                 return True, offset, root
         # No matching pattern found
-
         return False, 0, None
