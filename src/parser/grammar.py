@@ -2,18 +2,26 @@ import enum
 from ..lexer import Tokens
 
 class Grammar(enum.Enum):
-    LINE = 1
-    STATEMENT = 2
-    EXPRLIST = 3
-    VARLIST = 4
-    EXPR = 5
-    BASEXPR = 6
-    TERM = 7
-    FACTOR = 8
-    NUMBER = 9
+    PROGRAM = 0
+    LINELIST = 1
+    LINE = 2
+    STATEMENT = 3
+    EXPRLIST = 4
+    VARLIST = 5
+    EXPR = 6
+    BASEXPR = 7
+    TERM = 8
+    FACTOR = 9
     RELOP = 10
 
-m = {
+BNF = {
+    Grammar.PROGRAM: [
+        [Grammar.LINELIST]
+    ],
+    Grammar.LINELIST: [
+        [Grammar.LINE, Grammar.LINELIST],
+        [Grammar.LINE],
+    ],
     Grammar.LINE: [
         [Tokens.NUMBER, Grammar.STATEMENT, Tokens.NL],
         [Grammar.STATEMENT, Tokens.NL]
@@ -23,7 +31,7 @@ m = {
         [Tokens.IF, Grammar.EXPR, Grammar.RELOP, Grammar.EXPR, Tokens.THEN, Grammar.STATEMENT],
         [Tokens.GOTO, Grammar.EXPR],
         [Tokens.INPUT, Grammar.VARLIST],
-        [Tokens.LET, Grammar.VAR, Tokens.EQ, Grammar.EXPR],
+        [Tokens.LET, Tokens.IDENTIFIER, Tokens.EQ, Grammar.EXPR],
         [Tokens.GOSUB, Grammar.EXPR],
         [Tokens.RETURN],
         [Tokens.CLEAR],
@@ -47,6 +55,7 @@ m = {
         [Grammar.TERM, Tokens.MINUS, Grammar.BASEXPR],
     ],
     Grammar.EXPR: [
+        [Tokens.STRING],
         [Grammar.BASEXPR],
         [Tokens.PLUS, Grammar.TERM],
         [Tokens.MINUS, Grammar.TERM],
