@@ -26,6 +26,7 @@ BNF = {
     Grammar.LINE: [
         [Tokens.NUMBER, Grammar.STATEMENT],
         [Grammar.STATEMENT],
+        [Tokens.NL],
     ],
     Grammar.STATEMENT: [
         [Tokens.IF, Grammar.EXPR, Grammar.RELOP, Grammar.EXPR, Tokens.THEN, Grammar.STATEMENT],

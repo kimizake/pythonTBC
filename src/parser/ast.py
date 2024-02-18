@@ -1,4 +1,5 @@
 from .grammar import Grammar
+from ..lexer import Tokens
 from typing import List
 
 
@@ -13,7 +14,7 @@ class AST:
 
     def flatten(self) -> List:
         self.children = [_child for child in self.children for _child in child.flatten()]
-        if self.ctx in {Grammar.LINELIST, Grammar.BASEXPR, Grammar.TERM, Grammar.FACTOR}:
+        if self.ctx in {Grammar.LINELIST, Grammar.BASEXPR, Grammar.TERM, Grammar.FACTOR, Tokens.NL}:
             return self.children
         return [self]
 
