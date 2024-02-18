@@ -10,8 +10,8 @@ class Parser:
         self.ctx = []
 
     def generateTree(self) -> AST:
-        truth, _, tree = self.parse(Grammar.PROGRAM, 0)
-        if truth: 
+        truth, ptr, tree = self.parse(Grammar.PROGRAM, 0)
+        if truth and ptr == len(self.stream):
             tree.flatten()
             return tree
         raise SyntaxError()
